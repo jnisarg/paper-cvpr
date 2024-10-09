@@ -50,8 +50,8 @@ def train(config_manager):
 
     callbacks = [checkpoint_callback]
     if config_manager.get("rich_logging"):
-        callbacks.append(
-            pl_callbacks.RichModelSummary(), pl_callbacks.RichProgressBar()
+        callbacks.extend(
+            (pl_callbacks.RichModelSummary(), pl_callbacks.RichProgressBar())
         )
 
     trainer = L.Trainer(
