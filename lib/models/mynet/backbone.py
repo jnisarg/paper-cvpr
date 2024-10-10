@@ -11,7 +11,13 @@ from lib.models.nn import (
 )
 
 
-__all__ = []
+__all__ = [
+    "MyNetBackbone",
+    "mynet_backbone_b0",
+    "mynet_backbone_b1",
+    "mynet_backbone_b2",
+    "mynet_backbone_b3",
+]
 
 
 class MyNetBackbone(nn.Module):
@@ -113,7 +119,7 @@ class MyNetBackbone(nn.Module):
 
 def mynet_backbone_b0(**kwargs) -> MyNetBackbone:
     backbone = MyNetBackbone(
-        width_list=[8, 16, 32, 64, 128], depth_list=[1, 2, 2, 2, 2], dim=16, **kwargs
+        width_list=[8, 16, 32, 64, 128], depth_list=[1, 2, 2, 2, 2], **kwargs
     )
 
     return backbone
@@ -121,7 +127,7 @@ def mynet_backbone_b0(**kwargs) -> MyNetBackbone:
 
 def mynet_backbone_b1(**kwargs) -> MyNetBackbone:
     backbone = MyNetBackbone(
-        width_list=[16, 32, 64, 128, 256], depth_list=[1, 2, 3, 3, 4], dim=16, **kwargs
+        width_list=[16, 32, 64, 128, 256], depth_list=[1, 2, 3, 3, 4], **kwargs
     )
 
     return backbone
@@ -129,7 +135,7 @@ def mynet_backbone_b1(**kwargs) -> MyNetBackbone:
 
 def mynet_backbone_b2(**kwargs) -> MyNetBackbone:
     backbone = MyNetBackbone(
-        width_list=[24, 48, 96, 192, 384], depth_list=[1, 3, 4, 4, 6], dim=32, **kwargs
+        width_list=[24, 48, 96, 192, 384], depth_list=[1, 3, 4, 4, 6], **kwargs
     )
 
     return backbone
@@ -137,7 +143,7 @@ def mynet_backbone_b2(**kwargs) -> MyNetBackbone:
 
 def mynet_backbone_b3(**kwargs) -> MyNetBackbone:
     backbone = MyNetBackbone(
-        width_list=[32, 64, 128, 256, 512], depth_list=[1, 4, 6, 6, 9], dim=32, **kwargs
+        width_list=[32, 64, 128, 256, 512], depth_list=[1, 4, 6, 6, 9], **kwargs
     )
 
     return backbone
