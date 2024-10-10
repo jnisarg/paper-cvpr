@@ -192,7 +192,7 @@ if __name__ == "__main__":
     model = torch.nn.Conv2d(3, 16, 3, 1, 1)
     optim = torch.optim.SGD(model.parameters(), lr=1e-3)
 
-    max_iter = 20000
+    max_iter = 373800
     sched = WarmupPolyLR(
         optim,
         power=0.9,
@@ -215,3 +215,5 @@ if __name__ == "__main__":
     plt.ylabel("Learning Rate")
     plt.grid(True)
     plt.show()
+
+    plt.savefig("lr.png")

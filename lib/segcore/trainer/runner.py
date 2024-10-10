@@ -32,6 +32,12 @@ class SegmentationRunner(L.LightningModule):
         loss = self.criterion(preds, targets)
 
         self.log("train/loss", loss, on_step=True, on_epoch=True, prog_bar=True)
+        self.log(
+            "lr",
+            self.trainer.optimizers[0].param_groups[0]["lr"],
+            on_step=True,
+            prog_bar=True,
+        )
 
         return loss
 

@@ -52,9 +52,10 @@ class SegmentationDataset(Dataset):
         image = transforms.ToTensor()(image)
         image = transforms.Normalize(self.mean, self.std)(image)
 
-        temp = mask.copy()
-        for k, v in self.class_mapping.items():
-            mask[temp == k] = v
+        if mask_path.__contains__("cityscapes"):
+            temp = mask.copy()
+            for k, v in self.class_mapping.items():
+                mask[temp == k] = v
 
         mask = torch.tensor(mask, dtype=torch.long)
 

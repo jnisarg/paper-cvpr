@@ -1,6 +1,7 @@
 work_dir: exp/seg
 run_name: b0
-rich_logging: true
+rich_logging: false
+devices: 4
 
 tb:
   name: tb_logs
@@ -18,18 +19,18 @@ checkpoints:
 
 trainer:
   precision: 16-mixed
-  max_epochs: 80
+  max_epochs: 300
   enable_checkpointing: true
   check_val_every_n_epoch: 5
 
 segcore:
   
-  example_input_array: [1, 3, 1024, 2048]
+  example_input_array: [1, 3, 384, 768]
   
   dataset:
-   root: data/cityscapes/
-   train_size: [1024, 1024]
-   test_size: [1024, 2048]
+   root: data/UDS/
+   train_size: [384, 768]
+   test_size: [384, 768]
    mean: [0.485, 0.456, 0.406]
    std: [0.229, 0.224, 0.225]
    ignore_index: 255
@@ -40,28 +41,28 @@ segcore:
   dataloader:
     train:
       batch_size: 8
-      num_workers: 4
+      num_workers: 8
     val:
       batch_size: 1
-      num_workers: 4
+      num_workers: 8
 
   criterion:
     ohem_ratio: 0.8
 
   optimizer:
-    name: AdamW
-    lr: 0.0001
-    weight_decay: 0.0001
-    kwargs:
-      betas: [0.9, 0.999]
-      eps: 0.0000001
-      amsgrad: false
+    name: SGD
+    lr: 0.045
+    weight_decay: 0.0005
+    # kwargs:
+    #   betas: [0.9, 0.999]
+    #   eps: 0.000001
+    #   amsgrad: false
 
   scheduler:
-    name: warmupcosinelr
+    name: warmuppolylr
     kwargs:
       power: 0.9
-      warmup_iter: 1000
+      warmup_iter: 0
       warmup_ratio: 0.05
 
   metrics:
